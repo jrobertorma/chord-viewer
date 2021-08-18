@@ -12,3 +12,5 @@ But as a sort of MVP this version will display chords.
 I found an interesting chord db written by tombatossals [chords-db](https://github.com/tombatossals/chords-db).
 
 The first approach is to use this db to display chords.
+
+I haven't found any way to generate SVG images based on a react component, maybe will use https://svgjs.dev/docs/3.0/ 
