@@ -23,28 +23,36 @@ const MyChord = () => {
           chord={chord}
           instrument={instrument}
           lite={lite}
-          
       />
   )
 }
 
 function App() {
-  const cmaj = chordsData.chords.C[0].positions[0].frets.map( (value) => {
-    return <li>{value}</li>;
-  });
+  //const cmaj = chordsData.chords.C[0].key;
+  const cmajDiatonicChords = ['Cmaj','Dmin','Emin','Fmaj','Gmaj','Amin','Bdim'];
+  const allChords = [];
+
+  for (const key in chordsData.chords) {
+    const chords = chordsData.chords[key];
+
+    chords.map( (chord) => {
+      allChords.push("|key:"+chord.key+"suffix:"+chord.suffix+"|")
+    });
+
+  }
+
+  console.log(chordsData.chords);
+  console.log(allChords); //acá deben ir todos los acordes para usar filter() después ;)
+
   return (
     <div className="App">
       <p>
         Aquí vas a ver acordes, este es C major :o
       </p>
-      <ul>
-        {cmaj}
-      </ul>
-    <div style={{width: "200px"}}>
-      <MyChord />
-    </div>
-      
-      
+
+      <div style={{width: "200px"}}>
+        <MyChord />
+      </div>
     </div>
   );
 }
