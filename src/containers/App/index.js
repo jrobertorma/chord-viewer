@@ -30,19 +30,32 @@ const MyChord = () => {
 function App() {
   //const cmaj = chordsData.chords.C[0].key;
   const cmajDiatonicChords = ['Cmaj','Dmin','Emin','Fmaj','Gmaj','Amin','Bdim'];
-  const allChords = [];
+  let allChords = [];
 
   for (const key in chordsData.chords) {
     const chords = chordsData.chords[key];
 
-    chords.map( (chord) => {
-      allChords.push("|key:"+chord.key+"suffix:"+chord.suffix+"|")
+    chords.forEach( (chord) => {
+      let chordItem = {
+        key: chord.key,
+        suffix: chord.suffix,
+        positions: chord.positions
+      }
+      
+      allChords.push(chordItem);
     });
-
   }
 
+  let filteredChords = [];
+  
+  filteredChords = allChords.filter(( chord ) => {
+    if (chord.key === 'B') {
+      return true;
+    }
+  });
+
   console.log(chordsData.chords);
-  console.log(allChords); //acá deben ir todos los acordes para usar filter() después ;)
+  console.log(filteredChords); //acá deben ir todos los acordes para usar filter() después ;), funciona lol, ahora solo debes filtrar por key y suffix
 
   return (
     <div className="App">
