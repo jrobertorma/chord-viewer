@@ -3,9 +3,9 @@ import Chord from '@tombatossals/react-chords/lib/Chord';
 
 const MyChord = () => {
   const chord = {
-      frets: [1, 3, 3, 2, 1, 1],
-      fingers: [1, 3, 4, 2, 1, 1],
-      barres: [1],
+      frets: [-1, 2, 0, -1, 0, 1],
+      fingers: [0, 3, 0, 0, 0, 2],
+      barres: [],
       capo: false,
   }
   const instrument = {
@@ -29,7 +29,17 @@ const MyChord = () => {
 
 function App() {
   //const cmaj = chordsData.chords.C[0].key;
-  const cmajDiatonicChords = ['Cmaj','Dmin','Emin','Fmaj','Gmaj','Amin','Bdim'];
+  //const cmajDiatonicChords = ['Cmaj','Dmin','Emin','Fmaj','Gmaj','Amin','Bdim'];
+  const cmajDiatonicChords = [
+    { key: 'C', suffix: 'major' },
+    { key: 'D', suffix: 'minor' },
+    { key: 'E', suffix: 'minor' },
+    { key: 'F', suffix: 'major' },
+    { key: 'G', suffix: 'major' },
+    { key: 'A', suffix: 'minor' },
+    { key: 'B', suffix: 'dim' }
+  ];
+
   let allChords = [];
 
   for (const key in chordsData.chords) {
@@ -60,7 +70,7 @@ function App() {
   return (
     <div className="App">
       <p>
-        Aquí vas a ver acordes, este es C major :o
+        Aquí vas a ver acordes, este es Bdim :o
       </p>
 
       <div style={{width: "200px"}}>
