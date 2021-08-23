@@ -27,19 +27,7 @@ const MyChord = () => {
   )
 }
 
-function App() {
-  //const cmaj = chordsData.chords.C[0].key;
-  //const cmajDiatonicChords = ['Cmaj','Dmin','Emin','Fmaj','Gmaj','Amin','Bdim'];
-  const cmajDiatonicChords = [
-    { key: 'C', suffix: 'major' },
-    { key: 'D', suffix: 'minor' },
-    { key: 'E', suffix: 'minor' },
-    { key: 'F', suffix: 'major' },
-    { key: 'G', suffix: 'major' },
-    { key: 'A', suffix: 'minor' },
-    { key: 'B', suffix: 'dim' }
-  ];
-
+const parseAllChords = () => {
   let allChords = [];
 
   for (const key in chordsData.chords) {
@@ -56,15 +44,40 @@ function App() {
     });
   }
 
-  let filteredChords = [];
-  
-  filteredChords = allChords.filter(( chord ) => {
-    if (chord.key === 'B') {
-      return true;
-    }
-  });
+  return allChords
+}
 
-  console.log(chordsData.chords);
+const filterChordsByKey = ( chordset, chordToFilter ) => {
+  return chordToFilter.key;
+}
+
+function App() {
+  //const cmaj = chordsData.chords.C[0].key;
+  //const cmajDiatonicChords = ['Cmaj','Dmin','Emin','Fmaj','Gmaj','Amin','Bdim'];
+  const cmajDiatonicChords = [
+    { key: 'C', suffix: 'major' },
+    { key: 'D', suffix: 'minor' },
+    { key: 'E', suffix: 'minor' },
+    { key: 'F', suffix: 'major' },
+    { key: 'G', suffix: 'major' },
+    { key: 'A', suffix: 'minor' },
+    { key: 'B', suffix: 'dim' }
+  ];
+
+  let allParsedChords = parseAllChords();
+  let filteredChords = [];
+
+  filteredChords = cmajDiatonicChords.map(( chord )=>{
+    return filterChordsByKey(allParsedChords, chord);
+  });
+  
+  // filteredChords = allParsedChords.filter(( chord ) => {
+  //   if (chord.key === 'B') {
+  //     return true;
+  //   }
+  // });
+
+  //console.log(chordsData.chords);
   console.log(filteredChords); //acá deben ir todos los acordes para usar filter() después ;), funciona lol, ahora solo debes filtrar por key y suffix
 
   return (
