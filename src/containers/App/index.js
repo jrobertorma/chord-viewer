@@ -27,11 +27,17 @@ const MyChord = () => {
   )
 }
 
-const parseAllChords = () => {
+/**
+ * Transforms the chordsData object into an Array
+ * 
+ * @param {Array} rawChords - The chord object stored on ChordsData
+ * @returns {Array} An array with all the chords in the format [{object},{object},...] 
+ */
+const parseAllChords = (rawChords) => {
   let allChords = [];
 
-  for (const key in chordsData.chords) {
-    const chords = chordsData.chords[key];
+  for (const key in rawChords) {
+    const chords = rawChords[key];
 
     chords.forEach( (chord) => {
       let chordItem = {
@@ -44,16 +50,33 @@ const parseAllChords = () => {
     });
   }
 
-  return allChords
+  return allChords;
 }
 
-const filterChordsByKey = ( chordset, chordToFilter ) => {
-  return chordToFilter.key;
+/**
+ * Filters a set of chords an returns the matching chord or chords based on key and suffix props
+ * 
+ * @param {Array} chordset - The parsed chordset returned by parseAllChords();
+ * @param {Object} chordToFilter - An object with the format: { key: 'C', suffix: 'major' }
+ * @returns {Array} filteredChords - The array returned by a filter() calling over the chordset based on chordToFilter
+ */
+const filterChordsByKeyAndSuffix = ( chordset, chordToFilter ) => {
+  //en este punto del flujo estás dentro de un map, cada row del array llama a esta función, lo que retornes
+  //aquí se va a guardar en el array generado por el susodicho.
+
+  const filteredChords = chordset.filter(( chord )=>{
+    if ( chord.key === chordToFilter.key && chord.suffix === chordToFilter.suffix ){
+      return true;
+    }
+    else{
+      return false;
+    }
+  });
+
+  return filteredChords;
 }
 
 function App() {
-  //const cmaj = chordsData.chords.C[0].key;
-  //const cmajDiatonicChords = ['Cmaj','Dmin','Emin','Fmaj','Gmaj','Amin','Bdim'];
   const cmajDiatonicChords = [
     { key: 'C', suffix: 'major' },
     { key: 'D', suffix: 'minor' },
@@ -64,21 +87,16 @@ function App() {
     { key: 'B', suffix: 'dim' }
   ];
 
-  let allParsedChords = parseAllChords();
+  const rawChords = chordsData.chords; 
+  const allParsedChords = parseAllChords(rawChords);
   let filteredChords = [];
 
   filteredChords = cmajDiatonicChords.map(( chord )=>{
-    return filterChordsByKey(allParsedChords, chord);
+    return filterChordsByKeyAndSuffix(allParsedChords, chord);
   });
   
-  // filteredChords = allParsedChords.filter(( chord ) => {
-  //   if (chord.key === 'B') {
-  //     return true;
-  //   }
-  // });
-
   //console.log(chordsData.chords);
-  console.log(filteredChords); //acá deben ir todos los acordes para usar filter() después ;), funciona lol, ahora solo debes filtrar por key y suffix
+  console.log(filteredChords); //acordes filtrados segun un set de acordes provisto, es una matriz de una columna, ¿lo cambiamos?
 
   return (
     <div className="App">
