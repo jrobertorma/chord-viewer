@@ -90,13 +90,24 @@ function App() {
   const rawChords = chordsData.chords; 
   const allParsedChords = parseAllChords(rawChords);
   let filteredChords = [];
+  let chordsToRender = '';
 
   filteredChords = cmajDiatonicChords.map(( chord )=>{
     return filterChordsByKeyAndSuffix(allParsedChords, chord);
   });
   
   //console.log(chordsData.chords);
-  console.log(filteredChords); //acordes filtrados segun un set de acordes provisto, es una matriz de una columna, ¿lo cambiamos?
+  console.log(filteredChords); //acordes filtrados según un set de acordes provisto, es una matriz de una columna, ¿lo cambiamos?
+
+  chordsToRender = filteredChords.map( element => {
+    return (
+      element.map(chord => {
+        return (
+          <div key={chord.key+chord.suffix}>{chord.key+chord.suffix}</div>
+        );
+      })
+    );
+  });
 
   return (
     <div className="App">
@@ -107,6 +118,8 @@ function App() {
       <div style={{width: "200px"}}>
         <MyChord />
       </div>
+
+      {chordsToRender}
     </div>
   );
 }
