@@ -1,31 +1,5 @@
 import * as chordsData from '../../lib/guitar.json';
-import Chord from '@tombatossals/react-chords/lib/Chord';
-
-const MyChord = () => {
-  const chord = {
-      frets: [-1, 2, 0, -1, 0, 1],
-      fingers: [0, 3, 0, 0, 0, 2],
-      barres: [],
-      capo: false,
-  }
-  const instrument = {
-      strings: 6,
-      fretsOnChord: 4,
-      name: 'Guitar',
-      keys: [],
-      tunings: {
-          standard: ['E', 'A', 'D', 'G', 'B', 'E']
-      }
-  }
-  const lite = false // defaults to false if omitted
-  return (
-      <Chord
-          chord={chord}
-          instrument={instrument}
-          lite={lite}
-      />
-  )
-}
+import ChordImage from '../../components/ChordImage';
 
 /**
  * Transforms the chordsData object into an Array
@@ -87,23 +61,33 @@ function App() {
     { key: 'B', suffix: 'dim' }
   ];
 
-  const rawChords = chordsData.chords; 
-  const allParsedChords = parseAllChords(rawChords);
-  let filteredChords = [];
-  let chordsToRender = '';
+  const dmajDiatonicChords = [
+    { key: 'D', suffix: 'major' },
+    { key: 'E', suffix: 'minor' },
+    { key: 'F#', suffix: 'minor' },
+    { key: 'G', suffix: 'major' },
+    { key: 'A', suffix: 'major' },
+    { key: 'B', suffix: 'minor' },
+    { key: 'C#', suffix: 'dim' }
+  ];
 
-  filteredChords = cmajDiatonicChords.map(( chord )=>{
+  const rawChords = chordsData.chords; //console.log(rawChords); console.log(allParsedChords);
+  const allParsedChords = parseAllChords(rawChords); //converting the chordset in an array of objects
+  let filteredChords = []; //will contain an array of filtered chord objects
+  let chordsToRender = ''; //will contain a set of concatenated components to render based on the filteredChords data
+
+  //filtering the chords
+  filteredChords = dmajDiatonicChords.map(( chord )=>{
     return filterChordsByKeyAndSuffix(allParsedChords, chord);
   });
   
-  //console.log(chordsData.chords);
-  console.log(filteredChords); //acordes filtrados según un set de acordes provisto, es una matriz de una columna, ¿lo cambiamos?
+  //console.log(filteredChords);
 
   chordsToRender = filteredChords.map( element => {
     return (
       element.map(chord => {
         return (
-          <div key={chord.key+chord.suffix}>{chord.key+chord.suffix}</div>
+          <div key={chord.key+chord.suffix}><ChordImage chordData={chord}/></div>
         );
       })
     );
@@ -112,13 +96,8 @@ function App() {
   return (
     <div className="App">
       <p>
-        Aquí vas a ver acordes, este es Bdim :o
+        Diatonic Chords Viewer
       </p>
-
-      <div style={{width: "200px"}}>
-        <MyChord />
-      </div>
-
       {chordsToRender}
     </div>
   );
