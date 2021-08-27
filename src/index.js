@@ -4,9 +4,15 @@ import './index.css';
 import App from './containers/App';
 import reportWebVitals from './reportWebVitals';
 
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Container from '@material-ui/core/Container';
+
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <CssBaseline />
+      <Container>
+        <App />
+      </Container>
   </React.StrictMode>,
   document.getElementById('root')
 );

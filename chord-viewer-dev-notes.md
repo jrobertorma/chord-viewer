@@ -14,3 +14,10 @@ I found an interesting chord db written by tombatossals [chords-db](https://gith
 The first approach is to use this db to display chords.
 
 Luckily for my plans, there is this package to display svg guitar chords using a the chords db, it is [react-chords](https://github.com/tombatossals/react-chords) by tombatossals (again).
+
+## How does it work
+The app fetches the chords db and turns it into an array.
+
+Then it passes a filter to return the needed chords, based on an object.
+
+Then renders the diagrams for those chords.

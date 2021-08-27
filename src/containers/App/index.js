@@ -1,5 +1,5 @@
 import * as chordsData from '../../lib/guitar.json';
-import ChordImage from '../../components/ChordImage';
+import ChordsContainer from '../../components/ChordsContainer';
 
 /**
  * Transforms the chordsData object into an Array
@@ -71,26 +71,13 @@ function App() {
     { key: 'C#', suffix: 'dim' }
   ];
 
-  const rawChords = chordsData.chords; //console.log(rawChords); console.log(allParsedChords);
-  const allParsedChords = parseAllChords(rawChords); //converting the chordset in an array of objects
+  const rawChords = chordsData.chords; //Original chordset, console.log(rawChords); console.log(allParsedChords);
+  const allParsedChords = parseAllChords(rawChords); //converting the chordset into an array of objects
   let filteredChords = []; //will contain an array of filtered chord objects
-  let chordsToRender = ''; //will contain a set of concatenated components to render based on the filteredChords data
 
   //filtering the chords
-  filteredChords = dmajDiatonicChords.map(( chord )=>{
+  filteredChords = cmajDiatonicChords.map(( chord )=>{
     return filterChordsByKeyAndSuffix(allParsedChords, chord);
-  });
-  
-  //console.log(filteredChords);
-
-  chordsToRender = filteredChords.map( element => {
-    return (
-      element.map(chord => {
-        return (
-          <div key={chord.key+chord.suffix}><ChordImage chordData={chord}/></div>
-        );
-      })
-    );
   });
 
   return (
@@ -98,7 +85,7 @@ function App() {
       <p>
         Diatonic Chords Viewer
       </p>
-      {chordsToRender}
+      <ChordsContainer filteredChords={filteredChords} />
     </div>
   );
 }

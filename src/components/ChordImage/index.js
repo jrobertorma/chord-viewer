@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Chord from '@tombatossals/react-chords/lib/Chord';
 
 const ChordDiagram = ({chordPositions}) => {
@@ -33,11 +33,9 @@ const ChordImage = (props) => {
     
 
     return ( 
-        <div> 
+        <div style={{width: "200px"}}> 
             <p>{chordData.key+chordData.suffix}</p>
-            <div style={{width: "200px"}}>
-                <ChordDiagram chordPositions={chordData.positions[0]}/>
-            </div>
+            <ChordDiagram chordPositions={chordData.positions[0]}/>
         </div>);
 }
  
