@@ -1,6 +1,8 @@
 import * as chordsData from '../../lib/guitar.json';
 import ChordsContainer from '../../components/ChordsContainer';
 
+import Typography from '@material-ui/core/Typography';
+
 /**
  * Transforms the chordsData object into an Array
  * 
@@ -82,9 +84,9 @@ function App() {
 
   return (
     <div className="App">
-      <p>
+      <Typography variant="h4" gutterBottom>
         Diatonic Chords Viewer
-      </p>
+      </Typography>
       <ChordsContainer filteredChords={filteredChords} />
     </div>
   );

@@ -5,6 +5,7 @@ import ChordImage from '../ChordImage';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
+import Box from '@material-ui/core/Box';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -24,20 +25,18 @@ const ChordsContainer = ({filteredChords}) => {
         return (
             element.map(chord => {
             return (
-                <Grid item xs={3} key={chord.key+chord.suffix}>
-                     <Paper className={classes.paper}><ChordImage chordData={chord}/></Paper>
-                </Grid>
+                <Box p={1} key={chord.key+chord.suffix}>
+                    <Paper className={classes.paper}><ChordImage chordData={chord}/></Paper>
+                </Box>
             );
             })
         );
     });
 
     return (
-        <div className={classes.root}>
-            <Grid container spacing={3}>
-                {chordsToRender}
-            </Grid>
-        </div>
+        <Box display="flex">
+            {chordsToRender}
+        </Box>
     );
 }
  

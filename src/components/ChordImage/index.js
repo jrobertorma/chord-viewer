@@ -1,6 +1,8 @@
 import React from 'react';
 import Chord from '@tombatossals/react-chords/lib/Chord';
 
+import Typography from '@material-ui/core/Typography';
+
 const ChordDiagram = ({chordPositions}) => {
     const chord = {
         frets: chordPositions.frets,
@@ -29,12 +31,13 @@ const ChordDiagram = ({chordPositions}) => {
 
 const ChordImage = (props) => {
     const chordData = props.chordData
-    console.log(chordData);
-    
+    //console.log(chordData);
 
     return ( 
-        <div style={{width: "200px"}}> 
-            <p>{chordData.key+chordData.suffix}</p>
+        <div style={{'minWidth':'144px'}}> 
+            <Typography variant="h6" gutterBottom>
+                {chordData.key+" "+chordData.suffix}
+            </Typography>
             <ChordDiagram chordPositions={chordData.positions[0]}/>
         </div>);
 }
