@@ -1,0 +1,30 @@
+{
+"CmajDiatonicChords":[
+        { "key": "C", "suffix": "major" },
+        { "key": "D", "suffix": "minor" },
+        { "key": "E", "suffix": "minor" },
+        { "key": "F", "suffix": "major" },
+        { "key": "G", "suffix": "major" },
+        { "key": "A", "suffix": "minor" },
+        { "key": "B", "suffix": "dim" }
+    ],
+"DmajDiatonicChords":[
+        { "key": "D", "suffix": "major" },
+        { "key": "E", "suffix": "minor" },
+        { "key": "F#", "suffix": "minor" },
+        { "key": "G", "suffix": "major" },
+        { "key": "A", "suffix": "major" },
+        { "key": "B", "suffix": "minor" },
+        { "key": "C#", "suffix": "dim" }
+    ],
+"EmajDiatonicChords":[
+        { "key": "E", "suffix": "major" },
+        { "key": "F#", "suffix": "minor" },
+        { "key": "Ab", "suffix": "minor" },
+        { "key": "A", "suffix": "major" },
+        { "key": "B", "suffix": "major" },
+        { "key": "C#", "suffix": "minor" },
+        { "key": "Eb", "suffix": "dim" }
+    ],
+"Comments": "The chords of the EmajDiatonicChords chordset Ab minor and Eb dim replace its original counterparts G# minor and D# dim respectively"
+}

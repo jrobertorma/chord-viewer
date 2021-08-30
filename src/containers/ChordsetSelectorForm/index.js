@@ -1,6 +1,7 @@
 import React from 'react';
 
 import * as chordsData from '../../lib/guitar.json';
+import * as chordSets from '../../lib/chordSets.json';
 import ChordsContainer from '../../components/ChordsContainer';
 
 import InputLabel from '@material-ui/core/InputLabel';
@@ -106,8 +107,10 @@ const ChordSelectorForm = () => {
     const allParsedChords = parseAllChords(rawChords); //converting the chordset into an array of objects
     let filteredChords = []; //will contain an array of filtered chord objects
 
+    const allDiatonicChordsets = chordSets; //console.log(allDiatonicChordsets.default.cmajDiatonicChords);
+
     //filtering the chords
-    filteredChords = cmajDiatonicChords.map(( chord )=>{
+    filteredChords = allDiatonicChordsets.default.EmajDiatonicChords.map(( chord )=>{
         return filterChordsByKeyAndSuffix(allParsedChords, chord);
     });
 
