@@ -4,10 +4,9 @@ import * as chordsData from '../../lib/guitar.json';
 import * as chordSets from '../../lib/chordSets.json';
 import ChordsContainer from '../../components/ChordsContainer';
 
-import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 
 /**
  * Transforms the chordsData object into an Array
@@ -58,65 +57,52 @@ const filteredChords = chordset.filter(( chord )=>{
     return filteredChords;
 }
 
-const ChordSelectorFormBase = () => {
-    const [chordsetKey, setChordsetKey] = React.useState('');
+const ChordSelectorForm = () => {
+    const [chordsetKey, setChordsetKey] = React.useState('CmajDiatonicChords');
+    const [filteredChords, setfilteredChords] = React.useState([]);
+
+    const rawChords = chordsData.chords; //Original chordset, console.log(rawChords); console.log(allParsedChords);
+    const allParsedChords = parseAllChords(rawChords); //converting the chordset into an array of objects
+    //let filteredChords = []; //will contain an array of filtered chord objects
+
+    const allDiatonicChordsets = chordSets; //console.log(allDiatonicChordsets.default.cmajDiatonicChords);
 
     const handleChange = (event) => {
         setChordsetKey(event.target.value);
     };
 
-    return (
-        <FormControl>
-            <InputLabel id="demo-simple-select-label">Chordset Key</InputLabel>
-            <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={chordsetKey}
-                onChange={handleChange}
-            >
-                <MenuItem value={'C'}>C major</MenuItem>
-                <MenuItem value={'D'}>D major</MenuItem>
-                <MenuItem value={'E'}>E major</MenuItem>
-            </Select>
-        </FormControl>
-    );
-}
-
-const ChordSelectorForm = () => {
-    const cmajDiatonicChords = [
-        { key: 'C', suffix: 'major' },
-        { key: 'D', suffix: 'minor' },
-        { key: 'E', suffix: 'minor' },
-        { key: 'F', suffix: 'major' },
-        { key: 'G', suffix: 'major' },
-        { key: 'A', suffix: 'minor' },
-        { key: 'B', suffix: 'dim' }
-    ];
-    
-    const dmajDiatonicChords = [
-        { key: 'D', suffix: 'major' },
-        { key: 'E', suffix: 'minor' },
-        { key: 'F#', suffix: 'minor' },
-        { key: 'G', suffix: 'major' },
-        { key: 'A', suffix: 'major' },
-        { key: 'B', suffix: 'minor' },
-        { key: 'C#', suffix: 'dim' }
-    ];
-    
-    const rawChords = chordsData.chords; //Original chordset, console.log(rawChords); console.log(allParsedChords);
-    const allParsedChords = parseAllChords(rawChords); //converting the chordset into an array of objects
-    let filteredChords = []; //will contain an array of filtered chord objects
-
-    const allDiatonicChordsets = chordSets; //console.log(allDiatonicChordsets.default.cmajDiatonicChords);
-
-    //filtering the chords
-    filteredChords = allDiatonicChordsets.default.EmajDiatonicChords.map(( chord )=>{
-        return filterChordsByKeyAndSuffix(allParsedChords, chord);
-    });
+    const handleSubmit = (event) => {
+        const chordsKey = {chordsetKey}.chordsetKey; 
+        //console.log (allDiatonicChordsets.default[chordsKey]);
+        //filtering the chords
+        const fChords = allDiatonicChordsets.default[chordsKey].map(( chord )=>{
+            return filterChordsByKeyAndSuffix(allParsedChords, chord);
+        });
+        //console.log(fChords);
+        setfilteredChords(fChords);
+    }
 
     return (
         <div>
-            <ChordSelectorFormBase />
+            <form noValidate autoComplete="off">
+                <TextField
+                    id="standard-select-key"
+                    select
+                    label="Chordset Key"
+                    value={chordsetKey}
+                    onChange={handleChange}
+                    helperText="Please select the key"
+                >
+                    <MenuItem value={'CmajDiatonicChords'}>C major</MenuItem>
+                    <MenuItem value={'DmajDiatonicChords'}>D major</MenuItem>
+                    <MenuItem value={'EmajDiatonicChords'}>E major</MenuItem>
+                </TextField>
+
+                <Button variant="contained" color="primary" onClick={handleSubmit}>
+                    Show diatonic chords
+                </Button>
+            </form>
+
             <ChordsContainer filteredChords={filteredChords} />
         </div>
     );
