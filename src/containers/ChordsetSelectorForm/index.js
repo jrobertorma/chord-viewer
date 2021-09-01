@@ -21,13 +21,13 @@ const parseAllChords = (rawChords) => {
         const chords = rawChords[key];
 
         chords.forEach( (chord) => {
-        let chordItem = {
-            key: chord.key,
-            suffix: chord.suffix,
-            positions: chord.positions
-        }
+            let chordItem = {
+                key: chord.key,
+                suffix: chord.suffix,
+                positions: chord.positions
+            }
         
-        allChords.push(chordItem);
+            allChords.push(chordItem);
         });
     }
 
@@ -35,7 +35,7 @@ const parseAllChords = (rawChords) => {
 }
   
 /**
- * Filters a set of chords an returns the matching chord or chords based on key and suffix props
+ * Filters a set of chords an returns the matching chord or chords diagrams based on key and suffix props
  * 
  * @param {Array} chordset - The parsed chordset returned by parseAllChords();
  * @param {Object} chordToFilter - An object with the format: { key: 'C', suffix: 'major' }
@@ -45,9 +45,9 @@ const filterChordsByKeyAndSuffix = ( chordset, chordToFilter ) => {
 //en este punto del flujo estás dentro de un map, cada row del array llama a esta función, lo que retornes
 //aquí se va a guardar en el array generado por el susodicho.
 
-const filteredChords = chordset.filter(( chord )=>{
-    if ( chord.key === chordToFilter.key && chord.suffix === chordToFilter.suffix ){
-        return true;
+    const filteredChords = chordset.filter(( chord )=>{
+        if ( chord.key === chordToFilter.key && chord.suffix === chordToFilter.suffix ){
+            return true;
         }
         else{
             return false;
@@ -58,14 +58,21 @@ const filteredChords = chordset.filter(( chord )=>{
 }
 
 const ChordSelectorForm = () => {
+    const rawChords = chordsData.chords; //Original chordset, console.log(rawChords); console.log(allParsedChords);
+    const allParsedChords = parseAllChords(rawChords); //converting the chordset into an array of objects
+
+    const allDiatonicChordsets = chordSets; //console.log(allDiatonicChordsets.default.cmajDiatonicChords);
+
     const [chordsetKey, setChordsetKey] = React.useState('CmajDiatonicChords');
     const [filteredChords, setfilteredChords] = React.useState([]);
 
-    const rawChords = chordsData.chords; //Original chordset, console.log(rawChords); console.log(allParsedChords);
-    const allParsedChords = parseAllChords(rawChords); //converting the chordset into an array of objects
-    //let filteredChords = []; //will contain an array of filtered chord objects
+    const generateChordDiagrams = ( chordsKey ) => {
+        const chordDiagrams = allDiatonicChordsets.default[chordsKey].map(( chord )=>{
+            return filterChordsByKeyAndSuffix(allParsedChords, chord);
+        });
 
-    const allDiatonicChordsets = chordSets; //console.log(allDiatonicChordsets.default.cmajDiatonicChords);
+        return chordDiagrams;
+    }
 
     const handleChange = (event) => {
         setChordsetKey(event.target.value);
@@ -74,11 +81,11 @@ const ChordSelectorForm = () => {
     const handleSubmit = (event) => {
         const chordsKey = {chordsetKey}.chordsetKey; 
         //console.log (allDiatonicChordsets.default[chordsKey]);
-        //filtering the chords
-        const fChords = allDiatonicChordsets.default[chordsKey].map(( chord )=>{
-            return filterChordsByKeyAndSuffix(allParsedChords, chord);
-        });
+
+        //filtering the chords, and generating the diagrams
+        const fChords = generateChordDiagrams(chordsKey);
         //console.log(fChords);
+
         setfilteredChords(fChords);
     }
 
@@ -93,6 +100,16 @@ const ChordSelectorForm = () => {
                     onChange={handleChange}
                     helperText="Please select the key"
                 >
+                    {
+                        /**
+                         * El plan es usar el json para generar los values del select
+                         * tendría que modificarlo para además de los acordes guardar un
+                         * 'placeholder value'?, si ese es el caso tendrías que modificar
+                         * la forma en la que accedes a los nombres de los acordes :s,
+                         * revisa generateChordDiagrams()
+                         */
+                        console.log(Object.keys(allDiatonicChordsets.default))
+                    }
                     <MenuItem value={'CmajDiatonicChords'}>C major</MenuItem>
                     <MenuItem value={'DmajDiatonicChords'}>D major</MenuItem>
                     <MenuItem value={'EmajDiatonicChords'}>E major</MenuItem>

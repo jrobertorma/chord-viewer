@@ -26,5 +26,13 @@
         { "key": "C#", "suffix": "minor" },
         { "key": "Eb", "suffix": "dim" }
     ],
-"Comments": "The chords of the EmajDiatonicChords chordset Ab minor and Eb dim replace its original counterparts G# minor and D# dim respectively"
+"FmajDiatonicChords":[
+        { "key": "F", "suffix": "major" },
+        { "key": "G", "suffix": "minor" },
+        { "key": "A", "suffix": "minor" },
+        { "key": "Bb", "suffix": "major" },
+        { "key": "C", "suffix": "major" },
+        { "key": "D", "suffix": "minor" },
+        { "key": "E", "suffix": "dim" }
+    ]
 }
