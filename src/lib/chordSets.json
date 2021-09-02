@@ -34,5 +34,36 @@
         { "key": "C", "suffix": "major" },
         { "key": "D", "suffix": "minor" },
         { "key": "E", "suffix": "dim" }
+    ],
+"GmajDiatonicChords":[
+        { "key": "G", "suffix": "major" },
+        { "key": "A", "suffix": "minor" },
+        { "key": "B", "suffix": "minor" },
+        { "key": "C", "suffix": "major" },
+        { "key": "D", "suffix": "major" },
+        { "key": "E", "suffix": "minor" },
+        { "key": "F#", "suffix": "dim" }
+    ],
+"AmajDiatonicChords":[
+        { "key": "A", "suffix": "major" },
+        { "key": "B", "suffix": "minor" },
+        { "key": "C#", "suffix": "minor" },
+        { "key": "D", "suffix": "major" },
+        { "key": "E", "suffix": "major" },
+        { "key": "F#", "suffix": "minor" },
+        { "key": "G#", "suffix": "dim" },
+        { "key": "Ab", "suffix": "dim" }
+    ],
+"BmajDiatonicChords":[
+        { "key": "B", "suffix": "major" },
+        { "key": "C#", "suffix": "minor" },
+        { "key": "D#", "suffix": "minor" },
+        { "key": "Eb", "suffix": "minor" },
+        { "key": "E", "suffix": "major" },
+        { "key": "F#", "suffix": "major" },
+        { "key": "G#", "suffix": "minor" },
+        { "key": "Ab", "suffix": "minor" },
+        { "key": "A#", "suffix": "dim" },
+        { "key": "Bb", "suffix": "dim" }
     ]
 }

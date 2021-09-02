@@ -89,6 +89,8 @@ const ChordSelectorForm = () => {
         setfilteredChords(fChords);
     }
 
+    const chordsetsKeys = Object.keys(allDiatonicChordsets.default);
+
     return (
         <div>
             <form noValidate autoComplete="off">
@@ -101,18 +103,15 @@ const ChordSelectorForm = () => {
                     helperText="Please select the key"
                 >
                     {
-                        /**
-                         * El plan es usar el json para generar los values del select
-                         * tendría que modificarlo para además de los acordes guardar un
-                         * 'placeholder value'?, si ese es el caso tendrías que modificar
-                         * la forma en la que accedes a los nombres de los acordes :s,
-                         * revisa generateChordDiagrams()
-                         */
-                        console.log(Object.keys(allDiatonicChordsets.default))
+                        chordsetsKeys.map( (key) => {
+                            let placeholderValue = allDiatonicChordsets.default[key];
+                            return (
+                                <MenuItem key={key} value={key}>
+                                    {placeholderValue[0].key+" "+placeholderValue[0].suffix}
+                                </MenuItem>
+                            )
+                        })
                     }
-                    <MenuItem value={'CmajDiatonicChords'}>C major</MenuItem>
-                    <MenuItem value={'DmajDiatonicChords'}>D major</MenuItem>
-                    <MenuItem value={'EmajDiatonicChords'}>E major</MenuItem>
                 </TextField>
 
                 <Button variant="contained" color="primary" onClick={handleSubmit}>
