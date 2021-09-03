@@ -7,6 +7,18 @@ import ChordsContainer from '../../components/ChordsContainer';
 import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import Grid from '@material-ui/core/Grid';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme) => ({
+  selectField: {
+    minWidth: 140,
+    maxWidth: 180
+  },
+  chordsContainer: {
+    marginTop: '1em'
+  }
+}));
 
 /**
  * Transforms the chordsData object into an Array
@@ -91,35 +103,46 @@ const ChordSelectorForm = () => {
 
     const chordsetsKeys = Object.keys(allDiatonicChordsets.default);
 
+    const classes = useStyles();
+
     return (
         <div>
             <form noValidate autoComplete="off">
-                <TextField
-                    id="standard-select-key"
-                    select
-                    label="Chordset Key"
-                    value={chordsetKey}
-                    onChange={handleChange}
-                    helperText="Please select the key"
-                >
-                    {
-                        chordsetsKeys.map( (key) => {
-                            let placeholderValue = allDiatonicChordsets.default[key];
-                            return (
-                                <MenuItem key={key} value={key}>
-                                    {placeholderValue[0].key+" "+placeholderValue[0].suffix}
-                                </MenuItem>
-                            )
-                        })
-                    }
-                </TextField>
+                <Grid container spacing={2} alignItems="center"> 
+                    <Grid item xs={6} sm={4} md={2}> 
+                        <TextField
+                            id="standard-select-key"
+                            select
+                            label="Chordset Key"
+                            value={chordsetKey}
+                            onChange={handleChange}
+                            helperText="Please select the key"
+                            className={classes.selectField}
+                        >
+                            {
+                                chordsetsKeys.map( (key) => {
+                                    let placeholderValue = allDiatonicChordsets.default[key];
+                                    return (
+                                        <MenuItem key={key} value={key}>
+                                            {placeholderValue[0].key+" "+placeholderValue[0].suffix}
+                                        </MenuItem>
+                                    )
+                                })
+                            }
+                        </TextField>
+                    </Grid>
 
-                <Button variant="contained" color="primary" onClick={handleSubmit}>
-                    Show diatonic chords
-                </Button>
+                    <Grid item xs={6} sm={4} md={3}>
+                        <Button variant="contained" color="primary" onClick={handleSubmit}>
+                            Show diatonic chords
+                        </Button>
+                    </Grid>
+                </Grid>
             </form>
-
-            <ChordsContainer filteredChords={filteredChords} />
+            
+            <div className={classes.chordsContainer}>
+                <ChordsContainer filteredChords={filteredChords} />
+            </div>
         </div>
     );
 }
