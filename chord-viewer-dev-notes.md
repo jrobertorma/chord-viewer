@@ -21,3 +21,9 @@ The app fetches the chords db and turns it into an array.
 Then it passes a filter to return the needed chords, based on an object.
 
 Then renders the diagrams for those chords.
+
+## About making noises
+I'll try to use the midi data of the chords to produce some sound samples check
+
+https://medium.com/swinginc/playing-with-midi-in-javascript-b6999f2913c3
+https://github.com/mudcube/MIDI.js

@@ -4,11 +4,13 @@ import Chord from '@tombatossals/react-chords/lib/Chord';
 import Typography from '@material-ui/core/Typography';
 
 const ChordDiagram = ({chordPositions}) => {
+    
     const chord = {
         frets: chordPositions.frets,
         fingers: chordPositions.fingers,
         barres: chordPositions.barres,
         capo: chordPositions.capo ? chordPositions.capo : false,
+        baseFret: chordPositions.baseFret,
     }
     const instrument = {
         strings: 6,
@@ -32,7 +34,6 @@ const ChordDiagram = ({chordPositions}) => {
 const ChordImage = (props) => {
     const chordData = props.chordData;
     const position = props.position;
-    console.log(chordData);
 
     return ( 
         <div style={{'minWidth':'144px'}}> 
