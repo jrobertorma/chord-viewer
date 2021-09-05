@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 
-const ChordsContainer = ({filteredChords}) => {
+const ChordsContainer = ({filteredChords,position}) => {
     const classes = useStyles();
 
     const chordsToRender = filteredChords.map( element => {
@@ -25,7 +25,7 @@ const ChordsContainer = ({filteredChords}) => {
             element.map(chord => {
             return (
                 <Box p={1} key={chord.key+chord.suffix}>
-                    <Paper className={classes.paper}><ChordImage chordData={chord}/></Paper>
+                    <Paper className={classes.paper}><ChordImage chordData={chord} position={position}/></Paper>
                 </Box>
             );
             })

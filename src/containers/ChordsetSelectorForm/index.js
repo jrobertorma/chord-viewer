@@ -9,6 +9,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
+import { Divider, Typography } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   selectField: {
@@ -105,6 +106,17 @@ const ChordSelectorForm = () => {
 
     const classes = useStyles();
 
+    const positions = [0,1,2,3];
+
+    const chordsContainers = positions.map((position) => {
+        return (
+            <div>
+                <Typography variant="h5" gutterBottom> Chords version {position+1} </Typography>
+                <ChordsContainer filteredChords={filteredChords} position={position}/>
+            </div>
+        )
+    });
+
     return (
         <div>
             <form noValidate autoComplete="off">
@@ -139,9 +151,9 @@ const ChordSelectorForm = () => {
                     </Grid>
                 </Grid>
             </form>
-            
+
             <div className={classes.chordsContainer}>
-                <ChordsContainer filteredChords={filteredChords} />
+                {chordsContainers}
             </div>
         </div>
     );

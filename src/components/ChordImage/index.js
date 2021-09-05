@@ -30,15 +30,16 @@ const ChordDiagram = ({chordPositions}) => {
   }
 
 const ChordImage = (props) => {
-    const chordData = props.chordData
-    //console.log(chordData);
+    const chordData = props.chordData;
+    const position = props.position;
+    console.log(chordData);
 
     return ( 
         <div style={{'minWidth':'144px'}}> 
             <Typography variant="h6" gutterBottom>
                 {chordData.key+" "+chordData.suffix}
             </Typography>
-            <ChordDiagram chordPositions={chordData.positions[0]}/>
+            <ChordDiagram chordPositions={chordData.positions[position]}/>
         </div>);
 }
  
