@@ -45,3 +45,40 @@ const ChordImage = (props) => {
 }
  
 export default ChordImage;
+
+/**
+ * Agregamos una 'clickable surface' en el contenedor?
+ * en el listener del onClick le ponemos el generador MIDI?
+ */
+
+var context = null;
+var oscillator = null;
+function getOrCreateContext() {
+  if (!context) {
+    context = new AudioContext();
+    oscillator = context.createOscillator();
+    oscillator.connect(context.destination);
+  }
+  return context;
+  
+}
+
+let isStarted = false;
+function noteOn(midiNote) {
+    getOrCreateContext();
+    const freq = Math.pow(2, (midiNote-69)/12)*440;
+    oscillator.frequency.setTargetAtTime(freq, context.currentTime, 0);
+    if (!isStarted) {
+      oscillator.start(0);
+      isStarted = true;
+    } else {
+      context.resume();
+    }
+}
+
+function noteOff() {
+    context.suspend();
+}
+
+noteOn(key);
+noteOff();
