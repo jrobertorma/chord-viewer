@@ -22,8 +22,13 @@ Then it passes a filter to return the needed chords, based on an object.
 
 Then renders the diagrams for those chords.
 
-## About making noises
-I'll try to use the midi data of the chords to produce some sound samples check
+Lastly every chord will have an onClick listener to play the chord (stil working on that lol)
 
-https://medium.com/swinginc/playing-with-midi-in-javascript-b6999f2913c3
-https://github.com/mudcube/MIDI.js
+## About making noises
+I'll try to use the midi data of the chords to produce some sound samples see: 
+https://github.com/musicandcode/Chord-Player
+
+https://github.com/tonaljs/tonal - Musical theory library
+https://howlerjs.com/ - Audio library
+
+It is possible that we won't use the midi prop of the chord db, we may need to do some tweaks.
