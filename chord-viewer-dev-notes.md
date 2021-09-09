@@ -29,6 +29,16 @@ I'll try to use the midi data of the chords to produce some sound samples see:
 https://github.com/musicandcode/Chord-Player
 
 https://github.com/tonaljs/tonal - Musical theory library
+
+We have two main packages to use from tonaljs
+
+* https://github.com/tonaljs/tonal/tree/main/packages/tonal: Returns notes data such as height, letter, midi, name, etc. e.g.
+    
+note('C4');
+
+* https://github.com/tonaljs/tonal/tree/main/packages/chord
+
+
 https://howlerjs.com/ - Audio library
 
 It is possible that we won't use the midi prop of the chord db, we may need to do some tweaks.
