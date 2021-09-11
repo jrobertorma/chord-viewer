@@ -33,11 +33,32 @@ https://github.com/tonaljs/tonal - Musical theory library
 We have two main packages to use from tonaljs
 
 * https://github.com/tonaljs/tonal/tree/main/packages/tonal: Returns notes data such as height, letter, midi, name, etc. e.g.
-    
+
+```  
 note('C4');
+```
 
-* https://github.com/tonaljs/tonal/tree/main/packages/chord
+* https://github.com/tonaljs/tonal/tree/main/packages/chord: Return chord data, such as notes, root, intervals, etc. e.g.
 
+``` 
+Chord.getChord("maj7", "G4", "B4"); // =>
+// {
+//   empty: false,
+//   name: "G major seventh over B",
+//   symbol: "Gmaj7/B",
+//   tonic: "G4",
+//   root: "B4",
+//   rootDegree: 2,
+//   setNum: 2193,
+//   type: "major seventh",
+//   aliases: ["maj7", "Δ", "ma7", "M7", "Maj7"],
+//   chroma: "100010010001",
+//   intervals: ["3M", "5P", "7M", "8P"],
+//   normalized: "100010010001",
+//   notes: ["B4", "D5", "F#5", "G5"],
+//   quality: "Major",
+// }
+```
 
 https://howlerjs.com/ - Audio library
 
