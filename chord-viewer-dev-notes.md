@@ -62,6 +62,8 @@ Chord.getChord("maj7", "G4", "B4"); // =>
 
 So we could use tonaljs instead of @tombatossals libraries but, the chords and notes data will not be created with a guitar in mind, I only want to see guitar chords, and I like the diagrams, so we will stick with that for now. However, I still want to hear noises when I click a chord diagram, howlerjs may have what we need. 
 
+Or may not lol, howler can play locally stored sounds, wich means we need to record an store every chord sound needed and then map it to the handler, it looks doable, but not for today. (see # 10)
+
 https://howlerjs.com/ - Audio library
 
 It is possible that we won't use the midi prop of the chord db, we may need to do some tweaks.
